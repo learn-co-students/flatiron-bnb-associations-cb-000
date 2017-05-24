@@ -37,6 +37,7 @@ describe User do
       end
 
       it 'has many reservations through their listing' do
+        # binding.pry
         expect(katie.reservations).to include(reservation)
       end
     end
