@@ -33,6 +33,7 @@ describe User do
 
     context "as host" do
       it "has many listings" do
+
         expect(katie.listings).to include(listing)
       end
 
