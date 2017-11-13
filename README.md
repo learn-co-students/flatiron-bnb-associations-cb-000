@@ -47,7 +47,14 @@ Expected Models:
 []Reservation:
 []Review:
 []User:
+rails generate model Article title:string text:text
 
+rails g model City name:string
+rails g model Listing title:string description:text address:string listing_type:string price:double neighorhood_id:integer host_id:integer --no-test-framework
+rails g model Neighborhood name:string city_id:integer --no-test-framework
+rails g model Reservation listing_id:integer guest_id:integer checkin:string checkout:string --no-test-framework
+rails g model Review description:string rating:integer guest_id:integer reservation_id:integer --no-test-framework
+rails g model User name:string --no-test-framework
 
 Details:
 City:
@@ -82,12 +89,15 @@ Neighborhood:
   name
   belongs_to city
   has_many listings
-  
+
 Reservation:
   checkin: '2014-04-25',
   checkout: '2014-04-30',
   listing: listing,
   guest: logan
+  belongs_to guest
+  belongs_to listing
+
 
 
 Review:
@@ -95,6 +105,10 @@ Review:
   rating: 3,
   guest: logan,
   reservation: reservation
+  belongs_to guest
+  belongs_to reservation
+
+
 
 User:
   name
@@ -103,7 +117,7 @@ User:
     as guest,
       has review  (?)
       has_many trips
-      has_many reviews
+      has_many reviews (has written)
 
 
 
