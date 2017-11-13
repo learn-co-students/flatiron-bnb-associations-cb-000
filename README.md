@@ -35,3 +35,92 @@ has_many :listings, :foreign_key => 'host_id'
 [Foreign key and Class Name AR class methods](http://api.rubyonrails.org/classes/ActiveRecord/Associations/ClassMethods.html)
 
 <p data-visibility='hidden'>View <a href='https://learn.co/lessons/flatiron-bnb-associations' title='Flatiron-bnb: Associations'>Flatiron-bnb: Associations</a> on Learn.co and start learning to code for free.</p>
+
+## Notes
+I'm starting with nothing except tests.  
+
+Expected Models:
+
+[]City:
+[]Listing:
+[]Neighborhood:
+[]Reservation:
+[]Review:
+[]User:
+rails generate model Article title:string text:text
+
+rails g model City name:string
+rails g model Listing title:string description:text address:string listing_type:string price:double neighorhood_id:integer host_id:integer --no-test-framework
+rails g model Neighborhood name:string city_id:integer --no-test-framework
+rails g model Reservation listing_id:integer guest_id:integer checkin:string checkout:string --no-test-framework
+rails g model Review description:string rating:integer guest_id:integer reservation_id:integer --no-test-framework
+rails g model User name:string --no-test-framework
+
+Details:
+City:
+  name
+  has_many neighborhoods
+  has_many listings, through: neighborhoods
+
+
+Listing:
+  address: '6 Maple Street',
+  listing_type: "shared room",
+  title: "Shared room in apartment",
+  description: "share a room with me because I'm poor",
+  price: 15.00,
+  neighborhood: green_point,
+  host: katie
+
+  has a title
+  has a description
+  has an address
+  has a listing type
+  has a price
+  belongs_to neighborhood
+  belongs_to host
+  has_many reservations
+  has_many reviews, through: reservations
+  has_many guests, through: listings(?)
+
+
+
+Neighborhood:
+  name
+  belongs_to city
+  has_many listings
+
+Reservation:
+  checkin: '2014-04-25',
+  checkout: '2014-04-30',
+  listing: listing,
+  guest: logan
+  belongs_to guest
+  belongs_to listing
+
+
+
+Review:
+  description: "Meh, the host I shared a room with snored.",
+  rating: 3,
+  guest: logan,
+  reservation: reservation
+  belongs_to guest
+  belongs_to reservation
+
+
+
+User:
+  name
+  as host, has many listings
+    has_many reservations through listings
+    as guest,
+      has review  (?)
+      has_many trips
+      has_many reviews (has written)
+
+
+
+
+
+rails g
