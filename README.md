@@ -12,6 +12,56 @@ First think about the relations between all of the objects. Let's work through U
 
 We have a `user` object but a listing belongs to a specific type of user: a host. And the reservation (aka a trip) and a review both belong to a specific type of user: a guest. But we don't want to make two tables for a host and a guest. One way to do this is to create an association where, for example, a listing belongs to a host:
 
+class Reservation < ActiveRecord::Base
+  belongs_to :guest, :class_name => "User"
+  belongs_to :listing
+  has_one :review
+end
+
+Reservation.create(
+  checkin: '2014-04-25',
+  checkout: '2014-04-30',
+  listing: listing,
+  guest: logan
+
+bin/rake db:migrate RAILS_ENV=test
+
+rails g migration add_name_to_users name:string --no-test-framework
+
+rails g migration add_city_id_to_neighborhoods city_id:integer --no-test-framework
+
+rails g migration add_neighborhood_id_to_listings neighborhood_id:integer --no-test-framework
+
+rails g migration add_listing_id_to_reservations listing_id:integer  --no-test-framework
+
+rails d model Reservation --no-test-framework
+
+rails d migration add_listing_id_to_reservations --no-test-framework
+
+rails d migration add_listing_id_guest_id_to_reservations --no-test-framework
+
+rails d migration add_guest_id_to_reservations --no-test-framework
+
+rails g model Reservation checkin:string checkout:string listing_id:integer guest_id:integer --no-test-framework
+
+rails d model Reservation
+
+rails g migration drop_table :reservations
+
+rails generate migration DropReservationsTable
+
+rails d migration drop_reservations_table --no-test-framework
+rails d migration drop_table --no-test-framework
+
+rails g migration add_guest_id_to_reviews guest_id:integer --no-test-framework
+rails d migration add_guest_id_to_reviews --no-test-framework
+
+rails g migration add_reservation_id_to_reviews reservation_id:integer --no-test-framework
+
+
+
+
+
 ```ruby
 belongs_to :host
 ```
