@@ -6,7 +6,7 @@ describe City do
   it 'has a name' do
     expect(nyc.name).to eq('NYC')
   end
-
+  
   it 'has many neighborhoods' do
     financial_district = Neighborhood.create(name: 'Fi Di', city: nyc)
     green_point = Neighborhood.create(name: 'Green Point', city: nyc)
