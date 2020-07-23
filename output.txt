@@ -1,0 +1,33 @@
+
+User
+  has a name
+  guest and host
+    as host
+      has many listings
+      has many reservations through their listing
+    as guest
+      has many trips (FAILED - 1)
+      has written many reviews
+
+Failures:
+
+  1) User guest and host as guest has many trips
+     Failure/Error: expect(logan.trips).to include(reservation)
+
+     ActiveRecord::HasManyThroughSourceAssociationNotFoundError:
+       Could not find the source association(s) "trip" or :trips in model Reservation. Try 'has_many :trips, :through => :reservations, :source => <name>'. Is it one of listing, guest, or reviews?
+     # /usr/local/rvm/gems/ruby-2.3.1/gems/activerecord-4.2.7.1/lib/active_record/reflection.rb:850:in `check_validity!'
+     # /usr/local/rvm/gems/ruby-2.3.1/gems/activerecord-4.2.7.1/lib/active_record/associations/association.rb:25:in `initialize'
+     # /usr/local/rvm/gems/ruby-2.3.1/gems/activerecord-4.2.7.1/lib/active_record/associations/has_many_through_association.rb:10:in `initialize'
+     # /usr/local/rvm/gems/ruby-2.3.1/gems/activerecord-4.2.7.1/lib/active_record/associations.rb:162:in `new'
+     # /usr/local/rvm/gems/ruby-2.3.1/gems/activerecord-4.2.7.1/lib/active_record/associations.rb:162:in `association'
+     # /usr/local/rvm/gems/ruby-2.3.1/gems/activerecord-4.2.7.1/lib/active_record/associations/builder/association.rb:115:in `trips'
+     # ./spec/models/user_spec.rb:55:in `block (4 levels) in <top (required)>'
+
+Finished in 0.1629 seconds (files took 3.95 seconds to load)
+5 examples, 1 failure
+
+Failed examples:
+
+rspec ./spec/models/user_spec.rb:54 # User guest and host as guest has many trips
+
