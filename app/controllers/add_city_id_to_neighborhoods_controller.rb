@@ -1,0 +1,2 @@
+class AddCityIdToNeighborhoodsController < ApplicationController
+end
